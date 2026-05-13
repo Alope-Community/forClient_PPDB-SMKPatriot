@@ -10,7 +10,7 @@ class PendaftaranController extends Controller
 {
     public function index()
     {
-        return view('form-pendaftaran');
+        return view('user.form-pendaftaran');
     }
 
     public function store(Request $request)

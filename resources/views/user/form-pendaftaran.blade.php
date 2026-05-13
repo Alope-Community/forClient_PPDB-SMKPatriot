@@ -61,7 +61,7 @@
         <!-- Form Card -->
         <div class="bg-white/70 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/50 overflow-hidden">
             <div class="p-8 lg:p-12">
-                @if ($errors->any())
+                {{-- @if ($errors->any())
                     <div class="mb-8 p-6 rounded-2xl bg-red-50 border-2 border-red-200">
                         <div class="flex items-center">
                             <i class="fas fa-exclamation-triangle text-red-500 text-xl mr-3"></i>
@@ -69,13 +69,34 @@
                                 <h3 class="font-semibold text-red-800 mb-2">Ada kesalahan dalam pengisian:</h3>
                                 <ul class="text-red-700 space-y-1">
                                     @foreach ($errors->all() as $error)
-                                        <li><i class="fas fa-circle mr-2 text-xs"></i>{{ $error }}</li>
+                                        <li>
+                                            <i class="fas fa-circle mr-2 text-xs"></i>
+                                            {{ $error }}
+                                        </li>
                                     @endforeach
                                 </ul>
                             </div>
                         </div>
                     </div>
+                @endif --}}
+
+                @if(session('success'))
+                    <div class="mb-8 p-6 rounded-2xl bg-green-50 border-2 border-green-200">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 text-xl mr-3"></i>
+                            <div>
+                                <h3 class="font-semibold text-green-800 mb-1">
+                                    Berhasil!
+                                </h3>
+                                <p class="text-green-700">
+                                    {{ session('success') }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 @endif
+
+                
 
                 <form action="{{ route('ppdb.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8">
                     @csrf
@@ -91,7 +112,7 @@
                                 type="text" 
                                 name="nama_lengkap" 
                                 value="{{ old('nama_lengkap') }}"
-                                class="w-full px-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-400 transition-all duration-300 bg-white/50 backdrop-blur-sm shadow-sm @error('nama_lengkap') border-red-300 focus:ring-red-100 focus:border-red-400 @enderror"
+                                class="w-full px-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-400 transition-all duration-300 bg-white/50 backdrop-blur-sm shadow-sm"
                                 placeholder="Masukkan nama lengkap sesuai ijazah"
                                 required
                             >
@@ -109,7 +130,7 @@
                                 name="nisn" 
                                 value="{{ old('nisn') }}"
                                 maxlength="10"
-                                class="w-full px-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-400 transition-all duration-300 bg-white/50 backdrop-blur-sm shadow-sm @error('nisn') border-red-300 focus:ring-red-100 focus:border-red-400 @enderror"
+                                class="w-full px-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-400 transition-all duration-300 bg-white/50 backdrop-blur-sm shadow-sm"
                                 placeholder="Masukkan 10 digit NISN"
                                 required
                             >
@@ -128,7 +149,7 @@
                                 type="text" 
                                 name="tempat_lahir" 
                                 value="{{ old('tempat_lahir') }}"
-                                class="w-full px-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-purple-100 focus:border-purple-400 transition-all duration-300 bg-white/50 backdrop-blur-sm shadow-sm @error('tempat_lahir') border-red-300 focus:ring-red-100 focus:border-red-400 @enderror"
+                                class="w-full px-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-purple-100 focus:border-purple-400 transition-all duration-300 bg-white/50 backdrop-blur-sm shadow-sm"
                                 placeholder="Masukkan tempat lahir"
                                 required
                             >
@@ -143,7 +164,7 @@
                                 type="date" 
                                 name="tanggal_lahir" 
                                 value="{{ old('tanggal_lahir') }}"
-                                class="w-full px-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-orange-100 focus:border-orange-400 transition-all duration-300 bg-white/50 backdrop-blur-sm shadow-sm @error('tanggal_lahir') border-red-300 focus:ring-red-100 focus:border-red-400 @enderror"
+                                class="w-full px-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-orange-100 focus:border-orange-400 transition-all duration-300 bg-white/50 backdrop-blur-sm shadow-sm"
                                 required
                             >
                         </div>
@@ -160,7 +181,7 @@
                                 type="text" 
                                 name="asal_sekolah" 
                                 value="{{ old('asal_sekolah') }}"
-                                class="w-full px-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-indigo-100 focus:border-indigo-400 transition-all duration-300 bg-white/50 backdrop-blur-sm shadow-sm @error('asal_sekolah') border-red-300 focus:ring-red-100 focus:border-red-400 @enderror"
+                                class="w-full px-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-indigo-100 focus:border-indigo-400 transition-all duration-300 bg-white/50 backdrop-blur-sm shadow-sm"
                                 placeholder="Nama sekolah SMP/MTs asal"
                                 required
                             >
@@ -174,7 +195,7 @@
                             </label>
                             <select 
                                 name="jenis_kelamin"
-                                class="w-full px-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-pink-100 focus:border-pink-400 transition-all duration-300 bg-white/50 backdrop-blur-sm shadow-sm @error('jenis_kelamin') border-red-300 focus:ring-red-100 focus:border-red-400 @enderror"
+                                class="w-full px-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-pink-100 focus:border-pink-400 transition-all duration-300 bg-white/50 backdrop-blur-sm shadow-sm"
                                 required
                             >
                                 <option value="">Pilih jenis kelamin</option>
@@ -195,7 +216,7 @@
                                 type="tel" 
                                 name="nomor_hp" 
                                 value="{{ old('nomor_hp') }}"
-                                class="w-full px-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-400 transition-all duration-300 bg-white/50 backdrop-blur-sm shadow-sm @error('nomor_hp') border-red-300 focus:ring-red-100 focus:border-red-400 @enderror"
+                                class="w-full px-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-400 transition-all duration-300 bg-white/50 backdrop-blur-sm shadow-sm"
                                 placeholder="08xxxxxxxxxx"
                                 required
                             >
@@ -210,7 +231,7 @@
                                 type="email" 
                                 name="email" 
                                 value="{{ old('email') }}"
-                                class="w-full px-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-400 transition-all duration-300 bg-white/50 backdrop-blur-sm shadow-sm @error('email') border-red-300 focus:ring-red-100 focus:border-red-400 @enderror"
+                                class="w-full px-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-400 transition-all duration-300 bg-white/50 backdrop-blur-sm shadow-sm"
                                 placeholder="contoh@email.com"
                                 required
                             >
@@ -225,7 +246,7 @@
                         </label>
                         <select 
                             name="kompetensi_keahlian"
-                            class="w-full px-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-yellow-100 focus:border-yellow-400 transition-all duration-300 bg-white/50 backdrop-blur-sm shadow-sm @error('kompetensi_keahlian') border-red-300 focus:ring-red-100 focus:border-red-400 @enderror"
+                            class="w-full px-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-yellow-100 focus:border-yellow-400 transition-all duration-300 bg-white/50 backdrop-blur-sm shadow-sm"
                             required
                         >
                             <option value="">Pilih kompetensi keahlian</option>
@@ -246,7 +267,7 @@
                         <textarea 
                             name="alamat_lengkap" 
                             rows="3"
-                            class="w-full px-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-teal-100 focus:border-teal-400 transition-all duration-300 bg-white/50 backdrop-blur-sm shadow-sm resize-vertical @error('alamat_lengkap') border-red-300 focus:ring-red-100 focus:border-red-400 @enderror"
+                            class="w-full px-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-teal-100 focus:border-teal-400 transition-all duration-300 bg-white/50 backdrop-blur-sm shadow-sm resize-vertical"
                             placeholder="Masukkan alamat lengkap (RT/RW, Desa, Kecamatan, Kabupaten)"
                             required
                         >{{ old('alamat_lengkap') }}</textarea>
@@ -259,7 +280,7 @@
                             <i class="fas fa-camera text-purple-500 mr-2"></i>
                             Upload Pas Foto *
                         </label>
-                        <div class="border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center hover:border-blue-400 transition-all duration-300 hover:bg-blue-50 @error('pas_foto') border-red-300 bg-red-50/50 @enderror">
+                        <div class="border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center hover:border-blue-400 transition-all duration-300 hover:bg-blue-50">
                             <input 
                                 type="file" 
                                 name="pas_foto" 
