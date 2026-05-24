@@ -70,3 +70,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/logout', [AdminController::class, 'logout'])
         ->name('logout');
 });
+
+
+Route::get('/flash-test', function () {
+    return redirect('/flash-show')->with('success', 'TEST FLASH');
+});
+
+Route::get('/flash-show', function () {
+    return session()->all();
+});
