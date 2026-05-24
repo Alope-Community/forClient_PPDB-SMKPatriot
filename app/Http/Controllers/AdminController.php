@@ -49,7 +49,11 @@ class AdminController extends Controller
 
         $recent = Pendaftaran::latest()->limit(5)->get();
 
-        return view('admin.dashboard', compact('stats', 'recent'));
+        $jurusanChart = Pendaftaran::selectRaw('kompetensi_keahlian, COUNT(*) as total')
+            ->groupBy('kompetensi_keahlian')
+            ->pluck('total', 'kompetensi_keahlian');
+
+        return view('admin.dashboard', compact('stats', 'recent', 'jurusanChart'));
     }
 
     public function pendaftar(Request $request)
@@ -76,14 +80,12 @@ class AdminController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
-        // VALIDASI PENTING - Pastikan status ada dan valid
         $request->validate([
             'status' => 'required|in:pending,approved,rejected'
         ]);
 
         $pendaftar = Pendaftaran::findOrFail($id);
         
-        // Double check sebelum update
         $status = $request->input('status');
         if (!in_array($status, ['pending', 'approved', 'rejected'])) {
             return response()->json([
@@ -95,6 +97,6 @@ class AdminController extends Controller
         $oldStatus = $pendaftar->status;
         $pendaftar->update(['status' => $status]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Mengubah Status Pendaftaran Berhasil!');;
     }
 }

@@ -3,7 +3,62 @@
 @section('title', 'Dashboard')
 
 @section('content')
-<div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const ctx = document.getElementById('jurusanChart');
+
+        if (ctx) {
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: {!! json_encode($jurusanChart->keys()) !!},
+                    datasets: [{
+                        label: 'Jumlah Pendaftar',
+                        data: {!! json_encode($jurusanChart->values()) !!},
+                        borderWidth: 2,
+                        borderRadius: 10,
+                        backgroundColor: [
+                            '#3B82F6',
+                            '#10B981',
+                            '#F59E0B',
+                            '#EF4444',
+                            '#8B5CF6'
+                        ],
+                        borderColor: [
+                            '#2563EB',
+                            '#059669',
+                            '#D97706',
+                            '#DC2626',
+                            '#7C3AED'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+    });
+</script>
+
+<div class="overflow-auto">
     <div class="mb-8">
         <h2 class="text-3xl font-bold text-gray-900 mb-2">Dashboard</h2>
         <p class="text-gray-600">Selamat datang kembali, {{ session('admin_username') }}!</p>
@@ -57,6 +112,48 @@
                     <i class="fas fa-times-circle text-2xl text-red-600"></i>
                 </div>
             </div>
+        </div>
+    </div>
+
+
+    <div class="grid grid-cols-2 mb-5 gap-10">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mt-8">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-xl font-bold text-gray-800">
+                        Grafik Pendaftar per Jurusan
+                    </h2>
+
+                    <p class="text-sm text-gray-500">
+                        Statistik jumlah pendaftar berdasarkan kompetensi keahlian
+                    </p>
+                </div>
+
+                <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
+                    <i class="fas fa-chart-bar text-blue-600 text-xl"></i>
+                </div>
+            </div>
+
+            <canvas id="jurusanChart" height="150"></canvas>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg p-6 mt-8">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-xl font-bold text-gray-800">
+                        Grafik Pendaftar per Jurusan
+                    </h2>
+
+                    <p class="text-sm text-gray-500">
+                        Statistik jumlah pendaftar berdasarkan kompetensi keahlian
+                    </p>
+                </div>
+
+                <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
+                    <i class="fas fa-chart-bar text-blue-600 text-xl"></i>
+                </div>
+            </div>
+
+            <canvas id="jurusanChart" height="150"></canvas>
         </div>
     </div>
 

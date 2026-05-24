@@ -316,11 +316,11 @@
                             required
                         >
                             <option value="">Pilih kompetensi keahlian</option>
-                            <option value="Teknik Komputer dan Jaringan" {{ old('kompetensi_keahlian') == 'Teknik Komputer dan Jaringan' ? 'selected' : '' }}>Teknik Komputer dan Jaringan</option>
-                            <option value="Rekayasa Perangkat Lunak" {{ old('kompetensi_keahlian') == 'Rekayasa Perangkat Lunak' ? 'selected' : '' }}>Rekayasa Perangkat Lunak</option>
-                            <option value="Multimedia" {{ old('kompetensi_keahlian') == 'Multimedia' ? 'selected' : '' }}>Multimedia</option>
-                            <option value="Akuntansi dan Keuangan" {{ old('kompetensi_keahlian') == 'Akuntansi dan Keuangan' ? 'selected' : '' }}>Akuntansi dan Keuangan</option>
-                            <option value="Tata Busana" {{ old('kompetensi_keahlian') == 'Tata Busana' ? 'selected' : '' }}>Tata Busana</option>
+                            <option value="Akuntansi dan Keuangan Lembaga" {{ old('kompetensi_keahlian') == 'Akuntansi dan Keuangan Lembaga' ? 'selected' : '' }}>Akuntansi dan Keuangan Lembaga</option>
+                            <option value="Layanan Kesehatan" {{ old('kompetensi_keahlian') == 'Layanan Kesehatan' ? 'selected' : '' }}>Layanan Kesehatan</option>
+                            <option value="Manajemen Perkantoran dan Layanan Bisnis" {{ old('kompetensi_keahlian') == 'Manajemen Perkantoran dan Layanan Bisnis' ? 'selected' : '' }}>Manajemen Perkantoran dan Layanan Bisnis</option>
+                            <option value="Teknik Jaringan Komputer dan Telekomunikasi" {{ old('kompetensi_keahlian') == 'Teknik Jaringan Komputer dan Telekomunikasi' ? 'selected' : '' }}>Teknik Jaringan Komputer dan Telekomunikasi</option>
+                            <option value="Teknik Otomotif" {{ old('kompetensi_keahlian') == 'Teknik Otomotif' ? 'selected' : '' }}>Teknik Otomotif</option>
                         </select>
                     </div>
 

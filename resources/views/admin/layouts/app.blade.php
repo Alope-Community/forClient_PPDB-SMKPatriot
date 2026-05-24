@@ -19,7 +19,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center space-x-4">
-                    <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
+                    <div class="w-10 h-10 bg-linear-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
                         <i class="fas fa-graduation-cap text-white"></i>
                     </div>
                     <div>
@@ -44,26 +44,26 @@
     </nav>
 
     <!-- Sidebar -->
-    <div class="flex overflow-hidden h-screen">
-        <div class="w-64 bg-white shadow-lg border-r border-gray-200">
-            <nav class="mt-8 px-4">
-                <a href="{{ route('admin.dashboard') }}" 
-                   class="flex items-center px-4 py-3 text-gray-700 rounded-xl mb-2 {{ request()->routeIs('admin.dashboard') ? 'bg-blue-50 border-2 border-blue-200 font-semibold' : 'hover:bg-gray-100' }} transition-all duration-200">
-                    <i class="fas fa-tachometer-alt w-5 mr-3 text-blue-500"></i>
-                    Dashboard
-                </a>
-                <a href="{{ route('admin.pendaftar') }}" 
-                   class="flex items-center px-4 py-3 text-gray-700 rounded-xl mb-2 {{ request()->routeIs('admin.pendaftar*') ? 'bg-green-50 border-2 border-green-200 font-semibold' : 'hover:bg-gray-100' }} transition-all duration-200">
-                    <i class="fas fa-users w-5 mr-3 text-green-500"></i>
-                    Pendaftar ({{ \App\Models\Pendaftaran::count() }})
-                </a>
-            </nav>
-        </div>
-
+    <div class="w-64 bg-white shadow-lg border-r border-gray-200 fixed left-0 top-0 bottom-0">
+        <nav class="mt-8 px-4">
+            <a href="{{ route('admin.dashboard') }}" 
+               class="flex items-center px-4 py-3 text-gray-700 rounded-xl mb-2 {{ request()->routeIs('admin.dashboard') ? 'bg-blue-50 border-2 border-blue-200 font-semibold' : 'hover:bg-gray-100' }}">
+                <i class="fas fa-tachometer-alt w-5 mr-3 text-blue-500"></i>
+                Dashboard
+            </a>
+            <a href="{{ route('admin.pendaftar') }}" 
+               class="flex items-center px-4 py-3 text-gray-700 rounded-xl mb-2 {{ request()->routeIs('admin.pendaftar*') ? 'bg-green-50 border-2 border-green-200 font-semibold' : 'hover:bg-gray-100' }}">
+                <i class="fas fa-users w-5 mr-3 text-green-500"></i>
+                Pendaftar
+            </a>
+        </nav>
+    </div>
+    <div class="flex">
+        <div class="w-64"> </div>
         <!-- Main Content -->
         <div class="flex-1 p-8">
             @if(session('success'))
-                <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-2xl">
+                <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-2xl flash-message">
                     <div class="flex items-center">
                         <i class="fas fa-check-circle text-green-500 text-xl mr-3"></i>
                         <span class="font-medium text-green-800">{{ session('success') }}</span>
@@ -77,9 +77,9 @@
     <script>
         // Auto hide success message
         setTimeout(() => {
-            const alerts = document.querySelectorAll('.bg-green-50');
+            const alerts = document.querySelectorAll('.flash-message');
             alerts.forEach(alert => alert.remove());
-        }, 5000);
+        }, 1000);
     </script>
 </body>
 </html>
