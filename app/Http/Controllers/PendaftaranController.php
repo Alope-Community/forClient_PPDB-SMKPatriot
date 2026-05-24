@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CompressStat;
 use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 
 class PendaftaranController extends Controller
 {
@@ -17,6 +19,9 @@ class PendaftaranController extends Controller
     {
         try {
 
+            /**
+             * VALIDASI
+             */
             $validator = Validator::make($request->all(), [
                 'nama_lengkap' => 'required|string|max:255',
                 'nisn' => 'required|string|size:10|unique:pendaftarans,nisn',
@@ -33,70 +38,104 @@ class PendaftaranController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return back()->withErrors($validator)->withInput();
+                return back()
+                    ->withErrors($validator)
+                    ->withInput();
             }
 
+            /**
+             * AMBIL DATA
+             */
             $data = $request->except('pas_foto');
 
+            /**
+             * UPLOAD & COMPRESS FOTO
+             */
             if ($request->hasFile('pas_foto')) {
+
                 $foto = $request->file('pas_foto');
 
-                $filename = 'pasfoto_' . time() . '_' . $request->nisn . '.' . $foto->getClientOriginalExtension();
+                // Nama file
+                $filename = 'pasfoto_' . time() . '_' . $request->nisn . '.jpg';
 
-                $path = $foto->storeAs('pas_foto', $filename, 'public');
+                // Ukuran file asli
+                $originalSize = $foto->getSize();
 
-                $data['pas_foto'] = $path;
+                // Folder tujuan
+                $destination = storage_path('app/public/pas_foto');
+
+                // Buat folder jika belum ada
+                if (!file_exists($destination)) {
+                    mkdir($destination, 0777, true);
+                }
+
+                // Path simpan
+                $savePath = $destination . '/' . $filename;
+
+                /**
+                 * COMPRESS IMAGE
+                 */
+                $image = Image::make($foto);
+
+                // Resize lebar 600px
+                $image->resize(600, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+
+                // Simpan JPG kualitas 60%
+                $image->save($savePath, 60, 'jpg');
+
+                // Ukuran file setelah compress
+                $compressedSize = filesize($savePath);
+
+                // Simpan path ke database
+                $data['pas_foto'] = 'pas_foto/' . $filename;
+
+                /**
+                 * UPDATE STATISTIK COMPRESS
+                 */
+                $stat = CompressStat::first();
+
+                if (!$stat) {
+
+                    $stat = CompressStat::create([
+                        'original_size' => 0,
+                        'compressed_size' => 0,
+                        'total_files' => 0,
+                        'compression_ratio' => 0
+                    ]);
+                }
+
+                $stat->original_size += $originalSize;
+                $stat->compressed_size += $compressedSize;
+                $stat->total_files += 1;
+
+                // Hitung penghematan
+                $saved = $stat->original_size - $stat->compressed_size;
+
+                // Hitung rasio compress
+                $stat->compression_ratio =
+                    $stat->original_size > 0
+                        ? ($saved / $stat->original_size) * 100
+                        : 0;
+
+                $stat->save();
             }
 
+            /**
+             * SIMPAN DATA PENDAFTAR
+             */
             Pendaftaran::create($data);
 
             return redirect()->back()
                 ->with('success', 'Pendaftaran berhasil!');
-
         } catch (\Exception $e) {
 
-            dd($e->getMessage());
-
+            return back()->with(
+                'error',
+                $e->getMessage()
+            );
         }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

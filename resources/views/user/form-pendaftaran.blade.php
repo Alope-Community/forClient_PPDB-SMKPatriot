@@ -320,7 +320,7 @@
                             <option value="Layanan Kesehatan" {{ old('kompetensi_keahlian') == 'Layanan Kesehatan' ? 'selected' : '' }}>Layanan Kesehatan</option>
                             <option value="Manajemen Perkantoran dan Layanan Bisnis" {{ old('kompetensi_keahlian') == 'Manajemen Perkantoran dan Layanan Bisnis' ? 'selected' : '' }}>Manajemen Perkantoran dan Layanan Bisnis</option>
                             <option value="Teknik Jaringan Komputer dan Telekomunikasi" {{ old('kompetensi_keahlian') == 'Teknik Jaringan Komputer dan Telekomunikasi' ? 'selected' : '' }}>Teknik Jaringan Komputer dan Telekomunikasi</option>
-                            <option value="Teknik Otomotif" {{ old('kompetensi_keahlian') == 'Teknik Otomotif' ? 'selected' : '' }}>Teknik Otomotif</option>
+                            <option value="Tata Busana" {{ old('kompetensi_keahlian') == 'Tata Busana' ? 'selected' : '' }}>Tata Busana</option>
                         </select>
                     </div>
 
@@ -366,8 +366,8 @@
                                 id="pas_foto"
                                 required
                             >
-                            <label for="pas_foto" class="cursor-pointer >
-                                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4 ></i>
+                            <label for="pas_foto" class="cursor-pointer">
+                                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
                                 <p class="text-lg font-semibold text-gray-700 mb-1">Klik untuk upload pas foto</p>
                                 <p class="text-sm text-gray-500 mb-4">Format: JPG, PNG. Maksimal 8MB</p>
                             </label>
@@ -398,16 +398,11 @@
                     <div class="pt-8">
                         <button 
                             type="submit"
-                            class="w-full bg-linear-to-r from-blue-600 to-indigo-600 text-white font-semibold py-6 px-8 rounded-2xl text-lg shadow-xl hover:from-blue-700 hover:to-indigo-700 transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center space-x-3 group"
+                            class="w-full bg-blue-600  text-white font-semibold py-6 px-8 rounded-2xl text-lg shadow-xl hover:from-blue-700 hover:to-indigo-700 transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center space-x-3 group"
                         >
                             <i class="fas fa-paper-plane group-hover:translate-x-1 transition-transform"></i>
                             <span>Daftarkan Sekarang</span>
-                            <div class="w-6 h-6 border-2 border-white/30 rounded-full animate-spin-slow hidden group-hover:></div>
                         </button>
-                        {{-- <p class="text-center text-xs text-gray-500 mt-4">
-                            <i class="fas fa-shield-alt text-green-500 mr-1"></i>
-                            Data Anda aman dan terlindungi
-                        </p> --}}
                     </div>
                 </form>
             </div>

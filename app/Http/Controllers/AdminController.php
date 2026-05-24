@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CompressStat;
 use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -39,6 +40,9 @@ class AdminController extends Controller
 
     public function dashboard()
     {
+        /**
+         * Statistik pendaftaran
+         */
         $stats = [
             'total' => Pendaftaran::count(),
             'pending' => Pendaftaran::where('status', 'pending')->count(),
@@ -47,13 +51,40 @@ class AdminController extends Controller
             'today' => Pendaftaran::whereDate('created_at', today())->count(),
         ];
 
+        /**
+         * Statistik compress image
+         */
+        $compress = CompressStat::first();
+
+        // Jika belum ada data
+        if (!$compress) {
+
+            $compress = (object) [
+                'original_size' => 0,
+                'compressed_size' => 0,
+                'total_files' => 0,
+                'compression_ratio' => 0,
+            ];
+        }
+
+        /**
+         * Data terbaru
+         */
         $recent = Pendaftaran::latest()->limit(5)->get();
 
+        /**
+         * Chart jurusan
+         */
         $jurusanChart = Pendaftaran::selectRaw('kompetensi_keahlian, COUNT(*) as total')
             ->groupBy('kompetensi_keahlian')
             ->pluck('total', 'kompetensi_keahlian');
 
-        return view('admin.dashboard', compact('stats', 'recent', 'jurusanChart'));
+        return view('admin.dashboard', compact(
+            'stats',
+            'compress',
+            'recent',
+            'jurusanChart'
+        ));
     }
 
     public function pendaftar(Request $request)
