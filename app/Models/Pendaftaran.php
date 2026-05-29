@@ -21,7 +21,11 @@ class Pendaftaran extends Model
         'alamat_lengkap',
         'pas_foto',
         'mitra_pendaftaran',
-        'status'
+        'status',
+        'kk',
+        'ijazah',
+        'skl',
+        'kip',
     ];
 
     protected $casts = [

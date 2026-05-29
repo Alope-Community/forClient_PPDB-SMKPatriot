@@ -153,5 +153,103 @@
             @endif
         </div>
     </div>
+
+    {{-- Dokumen Pendaftar --}}
+    <div class="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden mt-8">
+        <div class="p-8 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-indigo-50">
+            <h3 class="text-2xl font-bold text-gray-900 flex items-center">
+                <i class="fas fa-folder-open mr-3 text-indigo-500"></i>Dokumen Pendaftar
+            </h3>
+        </div>
+
+        <div class="p-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            {{-- KK --}}
+            <div class="bg-gray-50 border rounded-2xl p-5">
+                <h4 class="font-bold text-gray-800 mb-3">
+                    <i class="fas fa-file-alt text-blue-500 mr-2"></i>Kartu Keluarga
+                </h4>
+
+                @if($pendaftar->kk)
+                    <a href="{{ asset('storage/' . $pendaftar->kk) }}"
+                    target="_blank"
+                    class="inline-flex items-center px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-all">
+                        <i class="fas fa-eye mr-2"></i>Lihat KK
+                    </a>
+                @else
+                    <p class="text-sm text-red-500">File tidak tersedia</p>
+                @endif
+            </div>
+
+            {{-- Ijazah --}}
+            <div class="bg-gray-50 border rounded-2xl p-5">
+                <h4 class="font-bold text-gray-800 mb-3">
+                    <i class="fas fa-graduation-cap text-green-500 mr-2"></i>Ijazah
+                </h4>
+
+                @if($pendaftar->ijazah)
+                    <a href="{{ asset('storage/' . $pendaftar->ijazah) }}"
+                    target="_blank"
+                    class="inline-flex items-center px-5 py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl font-semibold transition-all">
+                        <i class="fas fa-eye mr-2"></i>Lihat Ijazah
+                    </a>
+                @else
+                    <p class="text-sm text-red-500">File tidak tersedia</p>
+                @endif
+            </div>
+
+            {{-- SKL --}}
+            <div class="bg-gray-50 border rounded-2xl p-5">
+                <h4 class="font-bold text-gray-800 mb-3">
+                    <i class="fas fa-file-signature text-orange-500 mr-2"></i>SKL
+                </h4>
+
+                @if($pendaftar->skl)
+                    <a href="{{ asset('storage/' . $pendaftar->skl) }}"
+                    target="_blank"
+                    class="inline-flex items-center px-5 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-xl font-semibold transition-all">
+                        <i class="fas fa-eye mr-2"></i>Lihat SKL
+                    </a>
+                @else
+                    <p class="text-sm text-red-500">File tidak tersedia</p>
+                @endif
+            </div>
+
+            {{-- KIP --}}
+            <div class="bg-gray-50 border rounded-2xl p-5">
+                <h4 class="font-bold text-gray-800 mb-3">
+                    <i class="fas fa-id-card text-purple-500 mr-2"></i>KIP
+                </h4>
+
+                @if($pendaftar->kip)
+                    <a href="{{ asset('storage/' . $pendaftar->kip) }}"
+                    target="_blank"
+                    class="inline-flex items-center px-5 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-semibold transition-all">
+                        <i class="fas fa-eye mr-2"></i>Lihat KIP
+                    </a>
+                @else
+                    <p class="text-sm text-red-500">File tidak tersedia</p>
+                @endif
+            </div>
+
+            {{-- Pas Foto --}}
+            <div class="bg-gray-50 border rounded-2xl p-5">
+                <h4 class="font-bold text-gray-800 mb-3">
+                    <i class="fas fa-image text-pink-500 mr-2"></i>Pas Foto
+                </h4>
+
+                @if($pendaftar->pas_foto)
+                    <a href="{{ asset('storage/' . $pendaftar->pas_foto) }}"
+                    target="_blank"
+                    class="inline-flex items-center px-5 py-3 bg-pink-600 hover:bg-pink-700 text-white rounded-xl font-semibold transition-all">
+                        <i class="fas fa-eye mr-2"></i>Lihat Pas Foto
+                    </a>
+                @else
+                    <p class="text-sm text-red-500">File tidak tersedia</p>
+                @endif
+            </div>
+
+        </div>
+    </div>
 </div>
 @endsection

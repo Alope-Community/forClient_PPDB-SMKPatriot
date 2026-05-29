@@ -378,6 +378,98 @@
                         </div>
                     </div>
 
+                    <!-- Upload Dokumen -->
+                    <div class="grid md:grid-cols-2 gap-6">
+
+                        <!-- Upload KK -->
+                        <div>
+                            <label class="text-sm font-semibold text-gray-700 mb-2 flex items-center">
+                                <i class="fas fa-file-alt text-blue-500 mr-2"></i>
+                                Upload KK *
+                            </label>
+
+                            <input 
+                                type="file" 
+                                name="kk"
+                                accept=".pdf,.jpg,.jpeg,.png"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl
+                                focus:ring-4 focus:ring-blue-100 focus:border-blue-400
+                                bg-white/50 backdrop-blur-sm shadow-sm"
+                                required
+                            >
+
+                            <p class="mt-1 text-xs text-gray-500">
+                                Format PDF/JPG/PNG maksimal 8MB
+                            </p>
+                        </div>
+
+                        <!-- Upload Ijazah -->
+                        <div>
+                            <label class="text-sm font-semibold text-gray-700 mb-2 flex items-center">
+                                <i class="fas fa-graduation-cap text-green-500 mr-2"></i>
+                                Upload Ijazah *
+                            </label>
+
+                            <input 
+                                type="file" 
+                                name="ijazah"
+                                accept=".pdf,.jpg,.jpeg,.png"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl
+                                focus:ring-4 focus:ring-green-100 focus:border-green-400
+                                bg-white/50 backdrop-blur-sm shadow-sm"
+                                required
+                            >
+
+                            <p class="mt-1 text-xs text-gray-500">
+                                Format PDF/JPG/PNG maksimal 8MB
+                            </p>
+                        </div>
+
+                        <!-- Upload SKL -->
+                        <div>
+                            <label class="text-sm font-semibold text-gray-700 mb-2 flex items-center">
+                                <i class="fas fa-file-signature text-orange-500 mr-2"></i>
+                                Upload SKL *
+                            </label>
+
+                            <input 
+                                type="file" 
+                                name="skl"
+                                accept=".pdf,.jpg,.jpeg,.png"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl
+                                focus:ring-4 focus:ring-orange-100 focus:border-orange-400
+                                bg-white/50 backdrop-blur-sm shadow-sm"
+                                required
+                            >
+
+                            <p class="mt-1 text-xs text-gray-500">
+                                Format PDF/JPG/PNG maksimal 8MB
+                            </p>
+                        </div>
+
+                        <!-- Upload KIP -->
+                        <div>
+                            <label class="text-sm font-semibold text-gray-700 mb-2 flex items-center">
+                                <i class="fas fa-id-card text-purple-500 mr-2"></i>
+                                Upload KIP
+                            </label>
+
+                            <input 
+                                type="file" 
+                                name="kip"
+                                accept=".pdf,.jpg,.jpeg,.png"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl
+                                focus:ring-4 focus:ring-purple-100 focus:border-purple-400
+                                bg-white/50 backdrop-blur-sm shadow-sm"
+                            >
+
+                            <p class="mt-1 text-xs text-gray-500">
+                                Opsional • Format PDF/JPG/PNG maksimal 8MB
+                            </p>
+                        </div>
+
+                    </div>
+
                     <!-- Mitra -->
                     <div>
                         <label class="text-sm font-semibold text-gray-700 mb-2 flex items-center">
