@@ -203,77 +203,117 @@ class PendaftaranController extends Controller
 
             /**
              * =========================================
-             * UPLOAD PAS FOTO
+             * PAS FOTO
              * =========================================
              */
             if ($request->hasFile('pas_foto')) {
 
-                $data['pas_foto'] = $this->uploadCompressedFile(
+                $upload = $this->uploadCompressedFile(
                     $request->file('pas_foto'),
                     'pas_foto',
                     'pasfoto',
                     $request->nisn
                 );
+
+                $data['pas_foto'] = $upload['path'];
+
+                $data['pas_foto_original_size'] =
+                    $upload['original_size'];
+
+                $data['pas_foto_compressed_size'] =
+                    $upload['compressed_size'];
             }
 
             /**
              * =========================================
-             * UPLOAD KK
+             * KK
              * =========================================
              */
             if ($request->hasFile('kk')) {
 
-                $data['kk'] = $this->uploadCompressedFile(
+                $upload = $this->uploadCompressedFile(
                     $request->file('kk'),
                     'kk',
                     'kk',
                     $request->nisn
                 );
+
+                $data['kk'] = $upload['path'];
+
+                $data['kk_original_size'] =
+                    $upload['original_size'];
+
+                $data['kk_compressed_size'] =
+                    $upload['compressed_size'];
             }
 
             /**
              * =========================================
-             * UPLOAD IJAZAH
+             * IJAZAH
              * =========================================
              */
             if ($request->hasFile('ijazah')) {
 
-                $data['ijazah'] = $this->uploadCompressedFile(
+                $upload = $this->uploadCompressedFile(
                     $request->file('ijazah'),
                     'ijazah',
                     'ijazah',
                     $request->nisn
                 );
+
+                $data['ijazah'] = $upload['path'];
+
+                $data['ijazah_original_size'] =
+                    $upload['original_size'];
+
+                $data['ijazah_compressed_size'] =
+                    $upload['compressed_size'];
             }
 
             /**
              * =========================================
-             * UPLOAD SKL
+             * SKL
              * =========================================
              */
             if ($request->hasFile('skl')) {
 
-                $data['skl'] = $this->uploadCompressedFile(
+                $upload = $this->uploadCompressedFile(
                     $request->file('skl'),
                     'skl',
                     'skl',
                     $request->nisn
                 );
+
+                $data['skl'] = $upload['path'];
+
+                $data['skl_original_size'] =
+                    $upload['original_size'];
+
+                $data['skl_compressed_size'] =
+                    $upload['compressed_size'];
             }
 
             /**
              * =========================================
-             * UPLOAD KIP
+             * KIP
              * =========================================
              */
             if ($request->hasFile('kip')) {
 
-                $data['kip'] = $this->uploadCompressedFile(
+                $upload = $this->uploadCompressedFile(
                     $request->file('kip'),
                     'kip',
                     'kip',
                     $request->nisn
                 );
+
+                $data['kip'] = $upload['path'];
+
+                $data['kip_original_size'] =
+                    $upload['original_size'];
+
+                $data['kip_compressed_size'] =
+                    $upload['compressed_size'];
             }
 
             /**
@@ -282,7 +322,11 @@ class PendaftaranController extends Controller
             Pendaftaran::create($data);
 
             return redirect()->back()
-                ->with('success', 'Pendaftaran berhasil!');
+                ->with(
+                    'success',
+                    'Pendaftaran berhasil!'
+                );
+
         } catch (\Exception $e) {
 
             return back()->with(
@@ -332,9 +376,14 @@ class PendaftaranController extends Controller
         $originalSize = $file->getSize();
 
         /**
-         * =========================================
+         * DEFAULT
+         */
+        $compressedSize = $originalSize;
+
+        /**
+         * =====================================
          * FILE GAMBAR → COMPRESS
-         * =========================================
+         * =====================================
          */
         if (in_array($extension, ['jpg', 'jpeg', 'png'])) {
 
@@ -356,7 +405,7 @@ class PendaftaranController extends Controller
             });
 
             /**
-             * SAVE COMPRESSED
+             * SAVE
              */
             if ($extension == 'png') {
 
@@ -375,7 +424,7 @@ class PendaftaranController extends Controller
             }
 
             /**
-             * SIZE HASIL COMPRESS
+             * SIZE SETELAH COMPRESS
              */
             $compressedSize = filesize($savePath);
         } else {
@@ -388,14 +437,10 @@ class PendaftaranController extends Controller
                 $filename,
                 'public'
             );
-
-            $compressedSize = $originalSize;
         }
 
         /**
-         * =========================================
-         * UPDATE STATISTIK
-         * =========================================
+         * UPDATE GLOBAL STAT
          */
         $stat = CompressStat::first();
 
@@ -425,8 +470,12 @@ class PendaftaranController extends Controller
         $stat->save();
 
         /**
-         * RETURN PATH
+         * RETURN DATA
          */
-        return $folder . '/' . $filename;
+        return [
+            'path' => $folder . '/' . $filename,
+            'original_size' => $originalSize,
+            'compressed_size' => $compressedSize,
+        ];
     }
 }

@@ -166,33 +166,87 @@
 
             {{-- KK --}}
             <div class="bg-gray-50 border rounded-2xl p-5">
-                <h4 class="font-bold text-gray-800 mb-3">
+                <h4 class="font-bold text-gray-800 mb-4">
                     <i class="fas fa-file-alt text-blue-500 mr-2"></i>Kartu Keluarga
                 </h4>
 
                 @if($pendaftar->kk)
+
+                    <div class="space-y-2 mb-5">
+
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">Ukuran Asli</span>
+                            <span class="font-semibold text-gray-800">
+                                {{ number_format($pendaftar->kk_original_size / 1024, 2) }} KB
+                            </span>
+                        </div>
+
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">Setelah Compress</span>
+                            <span class="font-semibold text-green-600">
+                                {{ number_format($pendaftar->kk_compressed_size / 1024, 2) }} KB
+                            </span>
+                        </div>
+
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">Hemat</span>
+                            <span class="font-bold text-blue-600">
+                                {{ number_format((($pendaftar->kk_original_size - $pendaftar->kk_compressed_size) / $pendaftar->kk_original_size) * 100, 1) }}%
+                            </span>
+                        </div>
+
+                    </div>
+
                     <a href="{{ asset('storage/' . $pendaftar->kk) }}"
                     target="_blank"
                     class="inline-flex items-center px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-all">
                         <i class="fas fa-eye mr-2"></i>Lihat KK
                     </a>
+
                 @else
                     <p class="text-sm text-red-500">File tidak tersedia</p>
                 @endif
             </div>
 
-            {{-- Ijazah --}}
+            {{-- IJAZAH --}}
             <div class="bg-gray-50 border rounded-2xl p-5">
-                <h4 class="font-bold text-gray-800 mb-3">
+                <h4 class="font-bold text-gray-800 mb-4">
                     <i class="fas fa-graduation-cap text-green-500 mr-2"></i>Ijazah
                 </h4>
 
                 @if($pendaftar->ijazah)
+
+                    <div class="space-y-2 mb-5">
+
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">Ukuran Asli</span>
+                            <span class="font-semibold text-gray-800">
+                                {{ number_format($pendaftar->ijazah_original_size / 1024, 2) }} KB
+                            </span>
+                        </div>
+
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">Setelah Compress</span>
+                            <span class="font-semibold text-green-600">
+                                {{ number_format($pendaftar->ijazah_compressed_size / 1024, 2) }} KB
+                            </span>
+                        </div>
+
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">Hemat</span>
+                            <span class="font-bold text-green-600">
+                                {{ number_format((($pendaftar->ijazah_original_size - $pendaftar->ijazah_compressed_size) / $pendaftar->ijazah_original_size) * 100, 1) }}%
+                            </span>
+                        </div>
+
+                    </div>
+
                     <a href="{{ asset('storage/' . $pendaftar->ijazah) }}"
                     target="_blank"
                     class="inline-flex items-center px-5 py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl font-semibold transition-all">
                         <i class="fas fa-eye mr-2"></i>Lihat Ijazah
                     </a>
+
                 @else
                     <p class="text-sm text-red-500">File tidak tersedia</p>
                 @endif
@@ -200,16 +254,43 @@
 
             {{-- SKL --}}
             <div class="bg-gray-50 border rounded-2xl p-5">
-                <h4 class="font-bold text-gray-800 mb-3">
+                <h4 class="font-bold text-gray-800 mb-4">
                     <i class="fas fa-file-signature text-orange-500 mr-2"></i>SKL
                 </h4>
 
                 @if($pendaftar->skl)
+
+                    <div class="space-y-2 mb-5">
+
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">Ukuran Asli</span>
+                            <span class="font-semibold text-gray-800">
+                                {{ number_format($pendaftar->skl_original_size / 1024, 2) }} KB
+                            </span>
+                        </div>
+
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">Setelah Compress</span>
+                            <span class="font-semibold text-green-600">
+                                {{ number_format($pendaftar->skl_compressed_size / 1024, 2) }} KB
+                            </span>
+                        </div>
+
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">Hemat</span>
+                            <span class="font-bold text-orange-600">
+                                {{ number_format((($pendaftar->skl_original_size - $pendaftar->skl_compressed_size) / $pendaftar->skl_original_size) * 100, 1) }}%
+                            </span>
+                        </div>
+
+                    </div>
+
                     <a href="{{ asset('storage/' . $pendaftar->skl) }}"
                     target="_blank"
                     class="inline-flex items-center px-5 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-xl font-semibold transition-all">
                         <i class="fas fa-eye mr-2"></i>Lihat SKL
                     </a>
+
                 @else
                     <p class="text-sm text-red-500">File tidak tersedia</p>
                 @endif
@@ -217,33 +298,87 @@
 
             {{-- KIP --}}
             <div class="bg-gray-50 border rounded-2xl p-5">
-                <h4 class="font-bold text-gray-800 mb-3">
+                <h4 class="font-bold text-gray-800 mb-4">
                     <i class="fas fa-id-card text-purple-500 mr-2"></i>KIP
                 </h4>
 
                 @if($pendaftar->kip)
+
+                    <div class="space-y-2 mb-5">
+
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">Ukuran Asli</span>
+                            <span class="font-semibold text-gray-800">
+                                {{ number_format($pendaftar->kip_original_size / 1024, 2) }} KB
+                            </span>
+                        </div>
+
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">Setelah Compress</span>
+                            <span class="font-semibold text-green-600">
+                                {{ number_format($pendaftar->kip_compressed_size / 1024, 2) }} KB
+                            </span>
+                        </div>
+
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">Hemat</span>
+                            <span class="font-bold text-purple-600">
+                                {{ number_format((($pendaftar->kip_original_size - $pendaftar->kip_compressed_size) / $pendaftar->kip_original_size) * 100, 1) }}%
+                            </span>
+                        </div>
+
+                    </div>
+
                     <a href="{{ asset('storage/' . $pendaftar->kip) }}"
                     target="_blank"
                     class="inline-flex items-center px-5 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-semibold transition-all">
                         <i class="fas fa-eye mr-2"></i>Lihat KIP
                     </a>
+
                 @else
                     <p class="text-sm text-red-500">File tidak tersedia</p>
                 @endif
             </div>
 
-            {{-- Pas Foto --}}
+            {{-- PAS FOTO --}}
             <div class="bg-gray-50 border rounded-2xl p-5">
-                <h4 class="font-bold text-gray-800 mb-3">
+                <h4 class="font-bold text-gray-800 mb-4">
                     <i class="fas fa-image text-pink-500 mr-2"></i>Pas Foto
                 </h4>
 
                 @if($pendaftar->pas_foto)
+
+                    <div class="space-y-2 mb-5">
+
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">Ukuran Asli</span>
+                            <span class="font-semibold text-gray-800">
+                                {{ number_format($pendaftar->pas_foto_original_size / 1024, 2) }} KB
+                            </span>
+                        </div>
+
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">Setelah Compress</span>
+                            <span class="font-semibold text-green-600">
+                                {{ number_format($pendaftar->pas_foto_compressed_size / 1024, 2) }} KB
+                            </span>
+                        </div>
+
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">Hemat</span>
+                            <span class="font-bold text-pink-600">
+                                {{ number_format((($pendaftar->pas_foto_original_size - $pendaftar->pas_foto_compressed_size) / $pendaftar->pas_foto_original_size) * 100, 1) }}%
+                            </span>
+                        </div>
+
+                    </div>
+
                     <a href="{{ asset('storage/' . $pendaftar->pas_foto) }}"
                     target="_blank"
                     class="inline-flex items-center px-5 py-3 bg-pink-600 hover:bg-pink-700 text-white rounded-xl font-semibold transition-all">
                         <i class="fas fa-eye mr-2"></i>Lihat Pas Foto
                     </a>
+
                 @else
                     <p class="text-sm text-red-500">File tidak tersedia</p>
                 @endif

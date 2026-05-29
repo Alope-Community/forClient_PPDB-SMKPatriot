@@ -19,13 +19,39 @@ class Pendaftaran extends Model
         'email',
         'kompetensi_keahlian',
         'alamat_lengkap',
+
+        /**
+         * FILE
+         */
         'pas_foto',
-        'mitra_pendaftaran',
-        'status',
         'kk',
         'ijazah',
         'skl',
         'kip',
+
+        /**
+         * FILE SIZE
+         */
+        'pas_foto_original_size',
+        'pas_foto_compressed_size',
+
+        'kk_original_size',
+        'kk_compressed_size',
+
+        'ijazah_original_size',
+        'ijazah_compressed_size',
+
+        'skl_original_size',
+        'skl_compressed_size',
+
+        'kip_original_size',
+        'kip_compressed_size',
+
+        /**
+         * OTHER
+         */
+        'mitra_pendaftaran',
+        'status',
     ];
 
     protected $casts = [
